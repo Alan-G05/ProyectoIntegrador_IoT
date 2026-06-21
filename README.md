@@ -6,6 +6,11 @@
 
 Proyecto final que presenta desarrollo de un sistema IoT que clasifica géneros musicales mediante Machine Learning y sincroniza la iluminación LED en tiempo real.
 
+Integrantes:
+- Cristian Mendez Hernandez
+- González López Alan Antonio
+- Ramírez Teutle José Guadalupe
+
 </div>
 
 
