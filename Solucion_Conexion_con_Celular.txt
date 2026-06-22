@@ -1,0 +1,6 @@
+El ESP32 se estaba conectando con la IP 172.20.10.2, la misma IP que la Raspberry Pi, por ello, al conectar primero el ESP32 y luego la Raspberry Pi, surgía un problema porque ambos dispositivos tenían la misma IP y, como la Raspberry se conectó al final, se daba prioridad y se desconectaba el ESP32.
+Por eso no podía conectarse el ESP32 al Broker (Raspberry Pi), porque tenia la misma IP.
+
+Se configuró la IP estática 172.20.10.3 para que no haya conflicto con la Raspberry Pi.
+
+Una vez encendido nuevamente, y conectándose la Raspberry Pi, se mostró el mensaje "¡WiFi conectado! IP: 172.20.10.3" y "¡Conectado a Mosquitto!", indicando que la Raspberry y el ESP32, se habían configurado correctamente para utilizar el teléfono como router. Además, la computadora (PC) que se utilize para acceder por SSH a la RPI, tuvo la IP 172.20.10.8, indicando que los 3 dispositivos estaban en la misma red, teniendo el teléfono como router.
