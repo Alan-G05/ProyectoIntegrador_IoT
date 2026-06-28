@@ -2,13 +2,18 @@
 #include <PubSubClient.h>
 #include <Adafruit_NeoPixel.h>
 
-const char* ssid = "SSID";
-const char* password = "PASS";
-const char* mqtt_server = "IP_MQTT_BROKER";
+const char* ssid = "Alan";
+const char* password = "hola12345";
+const char* mqtt_server = "172.20.10.2";
 const char* topic = "musica";
 
 #define PIN_DATOS   23  
-#define NUM_LEDS    16  
+#define NUM_LEDS    16
+
+IPAddress local_IP(172, 20, 10, 3);
+IPAddress gateway(172, 20, 10, 1);
+IPAddress subnet(255, 255, 255, 240);
+IPAddress primaryDNS(8, 8, 8, 8);
 
 Adafruit_NeoPixel aro(NUM_LEDS, PIN_DATOS, NEO_GRB + NEO_KHZ800);
 WiFiClient espClient;
@@ -113,14 +118,19 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   aro.begin();
   aro.setBrightness(90);
   aro.show();
   
+  if(!WiFi.config(local_IP, gateway, subnet, primaryDNS)){
+    Serial.println("Fallo en la configuracion de la IP estattica");
+  }
+
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
-  Serial.println("\n¡WiFi Conectado!");
+  Serial.println("\n¡WiFi Conectado! IP: ");
+  Serial.println(WiFi.localIP());
 
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
